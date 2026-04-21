@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Repositories;
@@ -22,6 +22,18 @@ builder.Services.AddScoped<IRatingService, RatingService>();
 builder.Services.AddScoped<IRatingRepository, RatingRepository>();
 builder.Services.AddDbContext<ApiDBContext>
     (options => options.UseSqlServer(builder.Configuration.GetConnectionString("Home")));
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+});
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+});
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetConnectionString("Redis");
+});
 // Add services to the container.
 builder.Host.UseNLog();
 builder.Services.AddControllers();
@@ -50,3 +62,8 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+
+
+
